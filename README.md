@@ -30,7 +30,7 @@ Understanding marital stability requires looking beyond simple demographic marke
 
 ---
 
-## 📊 Model Performance Metrics
+## 📊 Model Performance & Error Analysis
 
 Evaluated on a $20\%$ held-out test split ($9,000$ samples):
 
@@ -39,13 +39,42 @@ Evaluated on a $20\%$ held-out test split ($9,000$ samples):
 * **Test Accuracy:** ~`75.4%`
 * **Macro Average F1-Score:** `0.75`
 
+<p align="center">
+  <img src="assets/confusion_matrix.png" alt="Test Set Confusion Matrix" width="450"/>
+</p>
+
 ---
 
-## 🔍 Explainable AI (TreeSHAP Insights)
+## 🔍 Explainable AI & SHAP Interpretability
 
-* **Primary Driver of Risk:** **Contempt** emerged as the strongest predictor of marital failure, with high values driving SHAP log-odds contributions upwards of $+1.2$.
-* **Protective Buffers:** High `repair_attempt_success` and elevated `positive_negative_ratio` consistently reduce predicted divorce risk (negative SHAP contributions).
-* **Education Dynamics:** Higher educational attainment demonstrates a monotonic protective effect against divorce, with a risk crossover point starting at `some_college`.
+### 1. Global Feature Importance (SHAP Summary Plot)
+<p align="center">
+  <img src="assets/shap_summary.png" alt="SHAP Summary Plot" width="600"/>
+</p>
+
+* **Primary Driver of Risk:** **Contempt** emerged as the single strongest predictor of marital failure, with high values (magenta cluster) driving log-odds contributions upwards of $+1.2$.
+* **Protective Buffers:** High `repair_attempt_success` and elevated `positive_negative_ratio` consistently pull predictions toward the negative side (reducing risk).
+
+---
+
+### 2. Local Instance Explanation (SHAP Waterfall Plot)
+<p align="center">
+  <img src="assets/shap_waterfall.png" alt="SHAP Waterfall Plot" width="650"/>
+</p>
+
+Deconstructs an individual prediction ($f(x) = -1.121$) against baseline log-odds ($E[f(X)] = -0.209$):
+* **Risk Drivers (+):** High `criticism` ($+0.39$) and elevated `contempt` ($+0.32$) pull the score toward high risk.
+* **Protective Drivers (-):** Older `age_at_marriage` ($-0.35$), higher `education_level` ($-0.29$), and first marriage status ($-0.24$) override risk factors to correctly classify the couple as stable (`0`).
+
+---
+
+### 3. Non-Linear Feature Interaction (SHAP Dependence Plot)
+<p align="center">
+  <img src="assets/shap_dependence.png" alt="SHAP Dependence Plot" width="550"/>
+</p>
+
+* Demonstrates a monotonic protective effect as `education_level` increases from $0$ to $4$.
+* Highlights a clear risk crossover threshold at level $2$ (`some_college`), above which education consistently reduces divorce risk.
 
 ---
 
@@ -61,7 +90,6 @@ Evaluated on a $20\%$ held-out test split ($9,000$ samples):
 ## 📱 Mobile-First Development Note
 
 This project was developed end-to-end—from data ingestion, EDA, pipeline construction, hyperparameter tuning, model serialization, to GitHub repository setup and Streamlit deployment—entirely on a **mobile device**.
-
 
 
 ## 📞 Contact Information:-
