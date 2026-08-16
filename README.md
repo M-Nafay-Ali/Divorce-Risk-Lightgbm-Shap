@@ -6,7 +6,7 @@
 ![LightGBM](https://img.shields.io/badge/LightGBM-4.0%2B-green)
 ![SHAP](https://img.shields.io/badge/SHAP-Explainable%20AI-red)
 
-> **Portfolio Project #21** | Engineered, evaluated, and deployed entirely on a **mobile device** using Google Colab and web interfaces.
+> **Portfolio Project #21** | Engineered, evaluated, and deployed entirely on a **mobile device** using KaggleNotebook and web interfaces.
 
 An end-to-end production machine learning application and interpretability engine built to assess marital stability and divorce risk using regularized gradient boosting (LightGBM) and TreeSHAP explainability mechanics.
 
